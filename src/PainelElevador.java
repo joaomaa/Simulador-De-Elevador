@@ -1,4 +1,6 @@
-public class PainelElevador {
+import java.io.Serializable;
+
+public class PainelElevador implements Serializable{
     private boolean botaoSubirAtivado;
     private boolean botaoDescerAtivado;
 

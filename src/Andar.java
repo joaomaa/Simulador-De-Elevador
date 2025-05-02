@@ -1,4 +1,6 @@
-public class Andar extends EntidadeSimulavel {
+import java.io.Serializable;
+
+public class Andar implements Serializable {
         private int numero;
         private Fila pessoasAguardando;
         private PainelElevador painel;

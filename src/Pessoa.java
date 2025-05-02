@@ -1,4 +1,6 @@
-public class Pessoa {
+import java.io.Serializable;
+
+public class Pessoa implements Serializable {
     private int id;
     private int andarOrigem;
     private int andarDestino;

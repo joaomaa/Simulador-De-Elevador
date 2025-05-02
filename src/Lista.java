@@ -49,5 +49,4 @@ public class Lista {
 
     public No getInicio() { return this.inicio; }
     public void setInicio(No inicio) { this.inicio = inicio; }
-
 }

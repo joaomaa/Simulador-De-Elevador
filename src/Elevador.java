@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 public class Elevador extends EntidadeSimulavel {
     private int id;
 

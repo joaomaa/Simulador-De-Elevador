@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Simulador {
+public class Simulador implements Serializable {
     private int minutoSimulado;
     private int velocidadeEmMs;
     private transient Timer timer;
