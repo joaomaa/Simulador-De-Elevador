@@ -1,25 +1,25 @@
-class No {
-    int valor;
-    No proximo;
+class No<T> {
+    T elemento;
+    No<T> proximo;
 
-    public No(int valor) {
-        this.valor = valor;
+    public No(T elemento) {
+        this.elemento = elemento;
         this.proximo = null;
     }
 
-    public int getElemento() { return this.valor; }
-    public void setElemento(int valor) { this.valor = valor; }
-    public No getProximo() { return this.proximo; }
-    public void setProximo(No proximo) { this.proximo = proximo; }
+    public T getElemento() { return this.elemento; }
+    public void setElemento(T elemento) { this.elemento = elemento; }
+    public No<T> getProximo() { return this.proximo; }
+    public void setProximo(No<T> proximo) { this.proximo = proximo; }
 }
 
-public class Lista {
-    private No inicio;
+public class Lista<T> {
+    private No<T> inicio;
 
     public Lista() { this.inicio = null; }
 
-    public boolean inserirFim(int elemento, int p) {
-        No novoNo = new No(elemento);
+    public boolean inserirFim(T elemento, int p) {
+        No<T> novoNo = new No<>(elemento);
         if (p < 0) {
             return false;
         }
@@ -30,7 +30,7 @@ public class Lista {
             return true;
         }
 
-        No atual = inicio;
+        No<T> atual = inicio;
         int i = 0;
 
         while (atual != null && i < p - 1) {
@@ -47,6 +47,6 @@ public class Lista {
         return true;
     }
 
-    public No getInicio() { return this.inicio; }
-    public void setInicio(No inicio) { this.inicio = inicio; }
+    public No<T> getInicio() { return this.inicio; }
+    public void setInicio(No<T> inicio) { this.inicio = inicio; }
 }
