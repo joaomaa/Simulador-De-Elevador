@@ -1,4 +1,6 @@
-class No<T> {
+import java.io.Serializable;
+
+class No<T> implements Serializable{
     T elemento;
     No<T> proximo;
 
@@ -13,7 +15,7 @@ class No<T> {
     public void setProximo(No<T> proximo) { this.proximo = proximo; }
 }
 
-public class Lista<T> {
+public class Lista<T> implements Serializable{
     private No<T> inicio;
 
     public Lista() { this.inicio = null; }

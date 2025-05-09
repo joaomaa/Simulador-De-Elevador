@@ -7,11 +7,6 @@ public class Main {
         simulador.iniciar();
 
         // Aguarda 5 segundos para demonstrar a simulação rodando
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         // Pausa a simulação
         simulador.pausar();

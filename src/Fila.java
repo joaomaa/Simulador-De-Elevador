@@ -1,4 +1,6 @@
-public class Fila {
+import java.io.Serializable;
+
+public class Fila implements Serializable{
     private static class No {
         int valor;
         No proximo;
