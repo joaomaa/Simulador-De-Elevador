@@ -12,20 +12,18 @@ public class Andar implements Serializable {
     }
 
     public void exibirEstado() {
-        System.out.printf("  Andar %d -> Pessoas aguardando: %d%n",
-            numero,
-            pessoasAguardando.getTamanho());
+        System.out.printf("  Andar %d -> Pessoas aguardando: %d%n", numero, pessoasAguardando.getTamanho());
+    }
+
+    public void adicionarPessoaNaFila(Pessoa p) {
+        pessoasAguardando.enqueue(p, p.getPrioridade());
+        System.out.printf("Pessoa %d (prio %d) aguardando no andar %d%n", p.getId(), p.getPrioridade(), numero);
     }
 
     public int getNumero() {
         return numero;
     }
-
-    public void adicionarPessoaNaFila(Pessoa p) {
-        pessoasAguardando.enqueue(p, p.getPrioridade());
-        System.out.printf("Pessoa %d (prio %d) aguardando no andar %d%n",
-                          p.getId(), p.getPrioridade(), numero);
-    }
+  
     public FilaPrioridade<Pessoa> getPessoasAguardando() {
         return pessoasAguardando;
     }

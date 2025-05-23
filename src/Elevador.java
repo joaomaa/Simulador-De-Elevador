@@ -20,14 +20,8 @@ public class Elevador extends EntidadeSimulavel {
         this.capacidadeMaxima = capacidadeMaxima;
     }
 
-     @Override
-    public void atualizar(int minutoSimulado) {
-        System.out.println("Elevador " + id + " no andar " + andarAtual + " dir=" + direcao + " min=" + minutoSimulado);
-
-        energiaUltimoMinuto = 0.0;
-        int andarAnterior = andarAtual;
-        
-         Fila<Pessoa> temp = new Fila<>();
+    public void desembarcarAtual() {
+        Fila<Pessoa> temp = new Fila<>();
         while (!pessoas.estaVazia()) {
             Pessoa p = pessoas.dequeue();
             if (p.getAndarDestino() == andarAtual) {
@@ -38,7 +32,9 @@ public class Elevador extends EntidadeSimulavel {
             }
         }
         pessoas = temp;
+    }
 
+    public void embarcar() {
         No<Andar> noAndar = andares.getInicio();
         while (noAndar != null && noAndar.getElemento().getNumero() != andarAtual) {
             noAndar = noAndar.getProximo();
@@ -54,16 +50,17 @@ public class Elevador extends EntidadeSimulavel {
                 System.out.printf("   -> Pessoa %d (prio %d) embarcou%n", p.getId(), p.getPrioridade());
             }
 
-        if (pessoas.getTamanho() >= capacidadeMaxima && !filaEspera.estaVazia()) {
-            System.out.printf("   -> Lotado (%d/%d). %d aguardam. Voltarei ao andar %d.%n",
-                          pessoas.getTamanho(),
-                          capacidadeMaxima,
-                          filaEspera.getTamanho(),
-                          andarAtual);
-            destinos.enqueue(andarAtual);
+            if (pessoas.getTamanho() >= capacidadeMaxima && !filaEspera.estaVazia()) {
+                System.out.printf("   -> Lotado (%d/%d). %d aguardam. Voltarei ao andar %d.%n", pessoas.getTamanho(), capacidadeMaxima, filaEspera.getTamanho(), andarAtual);
+                destinos.enqueue(andarAtual);
             }
-        }
+        } 
+    }
 
+    public void movimentacao() {
+        energiaUltimoMinuto = 0.0;
+        int andarAnterior = andarAtual;
+        
         if (!destinos.estaVazia()) {
             int prox = destinos.primeiro();
             if (andarAtual < prox) {
@@ -76,6 +73,7 @@ public class Elevador extends EntidadeSimulavel {
                 destinos.dequeue();
                 direcao = 'P';
             }
+            
             int deslocamento = Math.abs(andarAtual - andarAnterior);
             if (deslocamento > 0) {
                 double gasto = deslocamento * ENERGIA_POR_ANDAR;
@@ -87,20 +85,24 @@ public class Elevador extends EntidadeSimulavel {
         }
     }
 
+     @Override
+    public void atualizar(int minutoSimulado) {
+        System.out.println("Elevador " + id + " no andar " + andarAtual + " dir=" + direcao + " min=" + minutoSimulado);
+        desembarcarAtual();
+        embarcar();
+        movimentacao();
+    }
+
+    public void exibirEstado() {
+        System.out.printf("  Elevador %d -> Andar atual: %d | Direção: %c | Passageiros: %d%n", id, andarAtual, direcao, pessoas.getTamanho());
+    }
+
     public int getCapacidadeMaxima() {
         return capacidadeMaxima;
     }
 
     public int getLotacaoAtual() {
         return pessoas.getTamanho();
-    }
-
-    public void exibirEstado() {
-        System.out.printf("  Elevador %d -> Andar atual: %d | Direção: %c | Passageiros: %d%n",
-                          id,
-                          andarAtual,
-                          direcao,
-                          pessoas.getTamanho());
     }
 
     public double getEnergiaUltimoMinuto() {

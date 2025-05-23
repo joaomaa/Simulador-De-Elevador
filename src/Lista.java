@@ -49,6 +49,16 @@ public class Lista<T> implements Serializable{
         return true;
     }
 
+    public int getTamanho() {
+        int count = 0;
+        No<T> temp = inicio;
+        while (temp != null) {
+            count++;
+            temp = temp.proximo;
+        }
+        return count;
+    }
+
     public No<T> getInicio() { return this.inicio; }
     public void setInicio(No<T> inicio) { this.inicio = inicio; }
 }

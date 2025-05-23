@@ -11,24 +11,24 @@ public class Predio extends EntidadeSimulavel {
     }
 
     public void adicionarPessoa(Pessoa p) {
-        No<Andar> cursor = andares.getInicio();
-        while (cursor != null) {
-            Andar a = cursor.getElemento();
+        No<Andar> temp = andares.getInicio();
+        while (temp != null) {
+            Andar a = temp.getElemento();
             if (a.getNumero() == p.getAndarOrigem()) {
                 a.adicionarPessoaNaFila(p);
                 return;
             }
-            cursor = cursor.getProximo();
+            temp = temp.getProximo();
         }
         throw new IllegalArgumentException("Andar inválido: " + p.getAndarOrigem());
     }
 
     public void exibirEstado() {
         System.out.println("============= PREDIO ==============");
-        No<Andar> cursorAndar = andares.getInicio();
-        while (cursorAndar != null) {
-            cursorAndar.getElemento().exibirEstado();
-            cursorAndar = cursorAndar.getProximo();
+        No<Andar> andarTemp = andares.getInicio();
+        while (andarTemp != null) {
+            andarTemp.getElemento().exibirEstado();
+            andarTemp = andarTemp.getProximo();
         }
         central.exibirEstado();
         System.out.println("==================================\n");

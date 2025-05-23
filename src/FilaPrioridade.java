@@ -5,6 +5,7 @@ public class FilaPrioridade<T> implements Serializable {
         T valor;
         int prioridade;
         NoPri<T> proximo;
+
         NoPri(T valor, int prioridade) {
             this.valor = valor;
             this.prioridade = prioridade;
@@ -49,11 +50,7 @@ public class FilaPrioridade<T> implements Serializable {
         return inicio.valor;
     }
 
-    public boolean estaVazia() {
-        return tamanho == 0;
-    }
+    public boolean estaVazia() { return tamanho == 0; }
 
-    public int getTamanho() {
-        return tamanho;
-    }
+    public int getTamanho() { return tamanho; }
 }

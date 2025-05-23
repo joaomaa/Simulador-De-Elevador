@@ -6,10 +6,15 @@ public class CentralDeControle extends EntidadeSimulavel {
         this.elevadores = new Lista<>();
         this.andares = andares;
         for (int i = 0; i < quantidadeElevadores; i++) {
-            elevadores.inserirFim(
-                new Elevador(i+1, capacidadeElevador, andares),
-                i
-            );
+            elevadores.inserirFim(new Elevador(i+1, capacidadeElevador, andares),i);
+        }
+    }
+
+    public void exibirEstado() {
+        No<Elevador> temp = elevadores.getInicio();
+        while (temp != null) {
+            temp.getElemento().exibirEstado();
+            temp = temp.getProximo();
         }
     }
 
@@ -22,14 +27,6 @@ public class CentralDeControle extends EntidadeSimulavel {
             p = p.getProximo();
         }
         System.out.println("---------------------------------");
-    }
-
-    public void exibirEstado() {
-        No<Elevador> cursor = elevadores.getInicio();
-        while (cursor != null) {
-            cursor.getElemento().exibirEstado();
-            cursor = cursor.getProximo();
-        }
     }
 
     public Lista<Elevador> getElevadores() {
