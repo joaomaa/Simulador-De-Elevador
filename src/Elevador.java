@@ -34,7 +34,7 @@ public class Elevador extends EntidadeSimulavel {
         pessoas = temp;
     }
 
-    public void embarcar() {
+    public void embarcar(int minutoSimulado) {
         No<Andar> noAndar = andares.getInicio();
         while (noAndar != null && noAndar.getElemento().getNumero() != andarAtual) {
             noAndar = noAndar.getProximo();
@@ -45,6 +45,8 @@ public class Elevador extends EntidadeSimulavel {
             while (!filaEspera.estaVazia() && pessoas.getTamanho() < capacidadeMaxima) {
                 Pessoa p = filaEspera.dequeue();
                 p.entrarElevador();
+                p.setTempoEntrada(minutoSimulado);
+                Estatisticas.registrarEspera(p.getTempoDeEspera());
                 pessoas.enqueue(p);
                 destinos.enqueue(p.getAndarDestino());
                 System.out.printf("   -> Pessoa %d (prio %d) embarcou%n", p.getId(), p.getPrioridade());
@@ -89,7 +91,7 @@ public class Elevador extends EntidadeSimulavel {
     public void atualizar(int minutoSimulado) {
         System.out.println("Elevador " + id + " no andar " + andarAtual + " dir=" + direcao + " min=" + minutoSimulado);
         desembarcarAtual();
-        embarcar();
+        embarcar(minutoSimulado);
         movimentacao();
     }
 
