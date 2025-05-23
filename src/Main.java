@@ -1,32 +1,17 @@
 public class Main {
-    public static void main(String[] args) {
-        // Cria um simulador com 10 andares, 2 elevadores e 1000ms (1 segundo) por minuto simulado
-        Simulador simulador = new Simulador(10, 2, 1000);
+    public static void main(String[] args) throws InterruptedException {
+        // 1) Cria simulação com 5 andares, 2 elevadores, e 1 segundo por "minuto simulado"
+        // Configuração: 5 andares, 2 elevadores, 1 segundo por min, capacidade 6
+        // Pico: 08:00–10:00 (8*60 a 10*60), 5 chamadas/min no pico, 2 fora do pico
+        Simulador sim = new Simulador(
+            5, 5, 1000, 6,
+            8 * 60, 10 * 60,
+            5, 2
+        );
+        sim.iniciar();
 
-        // Inicia a simulação
-        simulador.iniciar();
-
-        // Aguarda 5 segundos para demonstrar a simulação rodando
-
-        // Pausa a simulação
-        simulador.pausar();
-
-        // Grava o estado da simulação em um arquivo
-        simulador.gravar("simulacao.dat");
-
-        // Carrega a simulação do arquivo
-        Simulador simuladorCarregado = Simulador.carregar("simulacao.dat");
-
-        // Aguarda mais 5 segundos para mostrar a simulação retomada
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // Encerra a simulação
-        if (simuladorCarregado != null) {
-            simuladorCarregado.encerrar();
-        }
+        // Executa 30 min simulados (30 segundos reais)
+        Thread.sleep(1440 * 1000);
+        sim.encerrar();
     }
 }
